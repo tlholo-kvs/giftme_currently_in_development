@@ -196,7 +196,7 @@ showAlertDialog(BuildContext context) {
   AlertDialog confDialog = AlertDialog(
     title: Text("Login Unsuccessful!!"),
     content: Text(
-        "Your login attemp was unsuccessful. Please enter a valid email and password combination"),
+        "Your login attempt was unsuccessful. Please enter a valid email and password combination"),
     actions: [
       okButton,
     ],
