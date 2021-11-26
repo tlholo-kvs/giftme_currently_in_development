@@ -2,27 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_application/screens/AuthScreen/donation_options.dart';
 import 'package:final_application/screens/AuthScreen/get_items.dart';
 import 'package:final_application/screens/AuthScreen/home.dart';
+import 'package:final_application/screens/AuthScreen/item_donated.dart';
 import 'package:final_application/screens/AuthScreen/main_page2.dart';
 import 'package:final_application/screens/AuthScreen/navigation_drawer_widget.dart';
 import 'package:final_application/screens/AuthScreen/profile.dart';
 import 'package:final_application/screens/AuthScreen/request_main.dart';
 import 'package:final_application/screens/AuthScreen/request_main2.dart';
-import 'package:final_application/screens/AuthScreen/request_review.dart';
-import 'package:final_application/screens/AuthScreen/requested_items.dart';
 import 'package:final_application/styles/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ItemDonated extends StatefulWidget {
-  _ItemDonatedState createState() => _ItemDonatedState();
+class RequestedItems extends StatefulWidget {
+  _RequestedItemsState createState() => _RequestedItemsState();
 }
 
-class _ItemDonatedState extends State<ItemDonated> {
+class _RequestedItemsState extends State<RequestedItems> {
   int _currentpos = 0;
 
-  CollectionReference dbCollection2 =
-      FirebaseFirestore.instance.collection('Reviewed Donated Items');
-  User user = FirebaseAuth.instance.currentUser;
+  CollectionReference rCollection2 =
+      FirebaseFirestore.instance.collection('Reviewed Requests');
+  User rUser = FirebaseAuth.instance.currentUser;
 
   Widget _buildContainer() {
     return Row(
@@ -204,19 +203,20 @@ class _ItemDonatedState extends State<ItemDonated> {
             Padding(
               padding: const EdgeInsets.only(left: 90, top: 20),
               child: Text(
-                "Donated Items",
+                "Requested Items",
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 80, left: 22),
+              padding: const EdgeInsets.only(bottom: 80),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 10),
                   StreamBuilder<QuerySnapshot>(
-                      stream: dbCollection2
-                          .doc(user.uid)
-                          .collection('Reviewed Donated Items')
+                      stream: rCollection2
+                          .doc(rUser.uid)
+                          .collection('Reviewed Requests')
                           .snapshots(),
                       builder:
                           (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -256,36 +256,31 @@ class _ItemDonatedState extends State<ItemDonated> {
                           );
                         }
                       }),
+                  
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 680, left: 280),
+              padding: const EdgeInsets.only(top: 680, left: 260),
               child: Row(
                 children: [
-                  ElevatedButton(
-                      //I added this ElevatedButton styling
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        fixedSize: MaterialStateProperty.all(Size(120, 40)),
-                      ),
+                  Icon(Icons.arrow_left),
+                  FlatButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RequestedItems()),
-                        );
+
+                       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ItemDonated()),
+                              );
+
                       },
                       child: Text(
-                        "Requests",
+                        "Donations",
+                        style: TextStyle(color: Colors.blue),
                       )),
-                  Icon(Icons.arrow_right)
+
+                      
                 ],
               ),
             ),
@@ -310,6 +305,10 @@ class _ItemDonatedState extends State<ItemDonated> {
                       icon: Icon(Icons.person),
                       label: "Profile",
                       backgroundColor: Colors.blue),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.textsms_outlined),
+                      label: "Forum",
+                      backgroundColor: Colors.blue)
                 ],
                 onTap: (index) {
                   setState(() {

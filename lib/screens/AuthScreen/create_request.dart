@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:final_application/provider/db_service.dart';
+import 'package:final_application/provider/db_service2.dart';
 import 'package:final_application/screens/AuthScreen/splashScreen3.dart';
 import 'package:final_application/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CreateItem extends StatefulWidget {
-  _CreateItemState createState() => _CreateItemState();
+class CreateRequest extends StatefulWidget {
+  _CreateRequestState createState() => _CreateRequestState();
 }
 
-class _CreateItemState extends State<CreateItem> {
+class _CreateRequestState extends State<CreateRequest> {
   bool isRememberMe = false;
   bool isHiddenPassword = true;
   String email, password;
@@ -41,6 +42,7 @@ class _CreateItemState extends State<CreateItem> {
       child: TextFormField(
         controller: title,
         decoration: InputDecoration(
+          //I added this OutlineInputBorder
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(15.0),
@@ -69,6 +71,7 @@ class _CreateItemState extends State<CreateItem> {
         controller: description,
         maxLines: 7,
         decoration: InputDecoration(
+          //I added this OutlineInputBorder
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(15.0),
@@ -90,43 +93,8 @@ class _CreateItemState extends State<CreateItem> {
     );
   }
 
-  Widget _buildNamer3() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        onChanged: (value) {
-          setState(() {
-            email = value;
-          });
-        },
-        decoration: InputDecoration(
-          //border: InputBorder.none,
-          contentPadding: EdgeInsets.only(top: 14),
-          prefixIcon: Icon(Icons.lock_clock, color: Colors.blue[300]),
-          hintText: "Drop Off Time",
-          //importing the hintStyle color
-          hintStyle: TextStyle(color: AppColors.hintStyleColour),
-        ),
-      ),
-    );
-  }
-
   Widget _buildImage() {
     return Icon(Icons.add_a_photo_rounded, size: 80);
-  }
-
-  Widget _buildRating() {
-    return Row(
-      children: [
-        //All of the Icons import the yellowIconsColor from AppColors
-        YellowStarIcon(),
-        YellowStarIcon(),
-        YellowStarIcon(),
-        YellowStarIcon(),
-        YellowStarIcon(),
-      ],
-    );
   }
 
   Widget _buildSubmitButton() {
@@ -140,11 +108,7 @@ class _CreateItemState extends State<CreateItem> {
             child: ElevatedButton(
                 //the button has an elevation of 5.0,
                 //color: Colors.blue,
-                // style: ElevatedButton.styleFrom(
-                //   primary: Colors.blue,
-                //   elevation: 5.0,
-                // ),
-                //I added a ButtonStyle
+                //I added this ElevatedButton styling
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -152,8 +116,6 @@ class _CreateItemState extends State<CreateItem> {
                       side: BorderSide(color: Colors.white),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all<double>(5),
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
                 onPressed: () {
                   if (!key.currentState.validate()) {
@@ -162,10 +124,10 @@ class _CreateItemState extends State<CreateItem> {
 
                     //Save data to database
 
-                    DbHelper()
+                    DbHelper2()
                         .add(
                             title: title.text.trim(),
-                            desciption: description.text.trim())
+                            description: description.text.trim())
                         .then((value) {
                       //a dialog will pop up on the UI to let the user know
                       //they have created an itemand it has been sent to
@@ -188,6 +150,17 @@ class _CreateItemState extends State<CreateItem> {
                   ),
                 )))
       ],
+    );
+  }
+
+  Widget _buildText() {
+    return Text(
+      'Quality',
+      style: TextStyle(
+        //importing the grey text colour
+        color: AppColors.greyTextColour,
+        fontSize: 16,
+      ),
     );
   }
 
@@ -244,30 +217,13 @@ class _CreateItemState extends State<CreateItem> {
             Padding(
                 padding: EdgeInsets.only(left: 140, top: 40),
                 child: Text(
-                  'Food Items',
+                  'Requests',
                   style: TextStyle(
                     //importing the white text colour
                     color: AppColors.whiteTextColor,
                     fontSize: 25,
                   ),
                 )),
-            Padding(
-              padding: const EdgeInsets.only(left: 135, top: 80),
-              child: GestureDetector(
-                onTap: _getImage,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  color: Colors.white,
-                  child: _image == null
-                      ? Icon(Icons.add)
-                      : Image.file(
-                          _image,
-                          fit: BoxFit.fill,
-                        ),
-                ),
-              ),
-            ),
             Form(
               key: key,
               child: Column(
@@ -313,21 +269,6 @@ class _CreateItemState extends State<CreateItem> {
   }
 }
 
-class YellowStarIcon extends StatelessWidget {
-  const YellowStarIcon({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.star_outline,
-      size: 30,
-      color: AppColors.yellowIconsColor,
-    );
-  }
-}
-
 showAlertDialog(BuildContext context) {
   // set up the button
   Widget okButton = TextButton(
@@ -341,7 +282,7 @@ showAlertDialog(BuildContext context) {
   AlertDialog confDialog = AlertDialog(
     title: Text("Confirmation Of Item Creation"),
     content: Text(
-        "Thank you!! Your item has been sent for review by the moderator."),
+        "Thank you!! Your request has been sent for review by the moderator."),
     actions: [
       okButton,
     ],
@@ -349,7 +290,7 @@ showAlertDialog(BuildContext context) {
 
   //This method will show the actual dialog
   showDialog(
-    barrierColor: Colors.white,
+    barrierColor: Colors.blue,
     context: context,
     builder: (BuildContext context) {
       return confDialog;

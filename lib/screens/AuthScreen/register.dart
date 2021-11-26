@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   File _image;
 
   Future _getImage() async {
-  var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = image;
@@ -101,7 +101,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 120,
                           width: 120,
                           color: Colors.white,
-                          child: _image == null? Icon(Icons.add) : Image.file(_image, fit: BoxFit.fill, ),
+                          child: _image == null
+                              ? Icon(Icons.add)
+                              : Image.file(
+                                  _image,
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                     ),
@@ -181,6 +186,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(
                                                       content: Text(value)));
+                                              //taking a chance at trying to override the default text in
+                                              //the Alertdialog with failure message from db
+                                              showAlertDialog(context, value);
                                             }
                                           });
                                         },
@@ -212,4 +220,33 @@ class _RegisterPageState extends State<RegisterPage> {
               : Center(child: CircularProgressIndicator())),
     );
   }
+}
+
+showAlertDialog(BuildContext context, String content) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+
+  //setting up the AlertDialog in terms of a title, content and actions
+  AlertDialog confDialog = AlertDialog(
+    title: Text("Registration unsuccesful!!"),
+    content: Text(
+        "Your login attempt was unsuccessful. Please enter a valid email and password combination"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  //This method will show the actual dialog
+  showDialog(
+    barrierColor: Colors.blue,
+    context: context,
+    builder: (BuildContext context) {
+      return confDialog;
+    },
+  );
 }

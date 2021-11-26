@@ -1,24 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:final_application/screens/AuthScreen/donation_options.dart';
+import 'package:final_application/provider/db_service.dart';
 import 'package:final_application/screens/AuthScreen/get_items.dart';
-import 'package:final_application/screens/AuthScreen/home.dart';
 import 'package:final_application/screens/AuthScreen/main_page2.dart';
 import 'package:final_application/screens/AuthScreen/navigation_drawer_widget.dart';
-import 'package:final_application/screens/AuthScreen/profile.dart';
-import 'package:final_application/screens/AuthScreen/request_main.dart';
-import 'package:final_application/screens/AuthScreen/request_main2.dart';
-import 'package:final_application/screens/AuthScreen/request_review.dart';
-import 'package:final_application/screens/AuthScreen/requested_items.dart';
+
 import 'package:final_application/styles/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ItemDonated extends StatefulWidget {
-  _ItemDonatedState createState() => _ItemDonatedState();
+class ManageDonations extends StatefulWidget {
+  _ManageDonationState createState() => _ManageDonationState();
 }
 
-class _ItemDonatedState extends State<ItemDonated> {
-  int _currentpos = 0;
+class _ManageDonationState extends State<ManageDonations> {
+  //int _currentpos = 0;
 
   CollectionReference dbCollection2 =
       FirebaseFirestore.instance.collection('Reviewed Donated Items');
@@ -173,7 +168,7 @@ class _ItemDonatedState extends State<ItemDonated> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           toolbarHeight: 80,
-          title: Text(''),
+          title: Text('Gift Me'),
           centerTitle: true,
           // actions: [
           //   Padding(
@@ -190,7 +185,7 @@ class _ItemDonatedState extends State<ItemDonated> {
         body: Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
@@ -202,17 +197,11 @@ class _ItemDonatedState extends State<ItemDonated> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 90, top: 20),
-              child: Text(
-                "Donated Items",
-                style: TextStyle(color: Colors.white, fontSize: 30),
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.only(bottom: 80, left: 22),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 10),
                   StreamBuilder<QuerySnapshot>(
                       stream: dbCollection2
                           .doc(user.uid)
@@ -237,9 +226,23 @@ class _ItemDonatedState extends State<ItemDonated> {
                                   final title = data.get('title');
                                   final time = data.get('time');
                                   final description = data.get('description');
+
+                                  String id = data.id;
                                   return ListTile(
                                     title: Text(title),
                                     subtitle: Text('$time'),
+                                    trailing: IconButton(
+                                      onPressed: () {
+                                        DbHelper()
+                                            .delete2(id: id)
+                                            .then((value) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(value)));
+                                        });
+                                      },
+                                      icon: Icon(Icons.delete),
+                                    ),
                                     leading: Icon(Icons.photo, size: 40),
                                   );
                                 })
@@ -257,82 +260,6 @@ class _ItemDonatedState extends State<ItemDonated> {
                         }
                       }),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 680, left: 280),
-              child: Row(
-                children: [
-                  ElevatedButton(
-                      //I added this ElevatedButton styling
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        fixedSize: MaterialStateProperty.all(Size(120, 40)),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RequestedItems()),
-                        );
-                      },
-                      child: Text(
-                        "Requests",
-                      )),
-                  Icon(Icons.arrow_right)
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 730),
-              child: BottomNavigationBar(
-                currentIndex: _currentpos,
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      label: "Home",
-                      backgroundColor: Colors.blue),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search),
-                      label: "Search",
-                      backgroundColor: Colors.blue),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.add_box, size: 30),
-                      label: "Donations",
-                      backgroundColor: Colors.blue),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: "Profile",
-                      backgroundColor: Colors.blue),
-                ],
-                onTap: (index) {
-                  setState(() {
-                    if (index == 0) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    } else if (index == 2) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DonationOptions()));
-                    } else if (index == 3) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Profile()));
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RequestMain2()));
-                    }
-                    _currentpos = index;
-                  });
-                },
               ),
             ),
           ],

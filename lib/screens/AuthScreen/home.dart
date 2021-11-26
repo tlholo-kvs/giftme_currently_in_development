@@ -8,7 +8,6 @@ import 'package:final_application/screens/AuthScreen/request_main2.dart';
 import 'package:final_application/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
@@ -95,8 +94,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           onTap: () {
-             Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => GetItem()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => GetItem()));
           }),
     );
   }
@@ -111,9 +110,19 @@ class _HomePageState extends State<HomePage> {
         ),
         SizedBox(width: 15),
         ElevatedButton(
+            //I added this ElevatedButton styling
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Colors.white),
+                ),
+              ),
+              fixedSize: MaterialStateProperty.all(Size(120, 40)),
+            ),
             onPressed: () {
-               Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage2()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainPage2()));
             },
             child: Text(
               'Other Items',
@@ -180,9 +189,23 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         ElevatedButton(
+                            //I added this ElevatedButton styling
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(120, 40)),
+                            ),
                             onPressed: () {
-                               Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => RequestMain()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RequestMain()));
                             },
                             child: Text(
                               'Requests',
@@ -227,17 +250,23 @@ class _HomePageState extends State<HomePage> {
                   onTap: (index) {
                     setState(() {
                       if (index == 0) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
                       } else if (index == 2) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => DonationOptions()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DonationOptions()));
                       } else if (index == 3) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Profile()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
                       } else {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => RequestMain2()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RequestMain2()));
                       }
                       _currentpos = index;
                     });

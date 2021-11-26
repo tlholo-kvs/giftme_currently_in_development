@@ -1,6 +1,6 @@
 import 'package:final_application/styles/app_colors.dart';
+import 'package:final_application/widgets/Yellow_Star_Icon.dart';
 import 'package:flutter/material.dart';
-
 
 class GetItem2 extends StatefulWidget {
   _GetItemState2 createState() => _GetItemState2();
@@ -78,32 +78,12 @@ class _GetItemState2 extends State<GetItem2> {
   Widget _buildRating() {
     return Row(
       children: [
-        //all of the icons import the yellowicon color
-        Icon(
-          Icons.star_outline,
-          size: 30,
-          color: AppColors.yellowIconsColor,
-        ),
-        Icon(
-          Icons.star_outline,
-          size: 30,
-          color: AppColors.yellowIconsColor,
-        ),
-        Icon(
-          Icons.star_outline,
-          size: 30,
-          color: AppColors.yellowIconsColor,
-        ),
-        Icon(
-          Icons.star_outline,
-          size: 30,
-          color: AppColors.yellowIconsColor,
-        ),
-        Icon(
-          Icons.star_outline,
-          size: 30,
-          color: AppColors.yellowIconsColor,
-        ),
+        //Yellow star icon widget imported from the YellowStarIcon class
+        YellowStarIcon(),
+        YellowStarIcon(),
+        YellowStarIcon(),
+        YellowStarIcon(),
+        YellowStarIcon(),
       ],
     );
   }
@@ -185,11 +165,18 @@ class _GetItemState2 extends State<GetItem2> {
             Padding(
               padding: const EdgeInsets.only(top: 750, left: 260),
               child: ElevatedButton(
+                //I added this ElevatedButton styling
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  fixedSize: MaterialStateProperty.all(Size(120, 40)),
+                ),
                 onPressed: () {},
                 child: Text('Request'),
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(120, 40),
-                ),
               ),
             )
           ],

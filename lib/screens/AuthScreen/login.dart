@@ -1,4 +1,6 @@
 import 'package:final_application/provider/auth_provider.dart';
+import 'package:final_application/screens/AuthScreen/admin_home.dart';
+import 'package:final_application/screens/AuthScreen/create_request.dart';
 import 'package:final_application/screens/AuthScreen/home.dart';
 import 'package:final_application/screens/AuthScreen/item_donated.dart';
 import 'package:final_application/screens/AuthScreen/register.dart';
@@ -70,11 +72,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Column(
                               children: [
-                                SizedBox(height: 40,),
+                                SizedBox(
+                                  height: 40,
+                                ),
                                 TextFormField(
                                   controller: _email,
                                   decoration: InputDecoration(
-                                    
                                     hintText: 'Email',
                                     prefixIcon: Icon(Icons.email),
                                   ),
@@ -85,7 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                                 TextFormField(
                                   controller: _password,
                                   decoration: InputDecoration(
-                                      
                                       hintText: 'Password',
                                       prefixIcon: Icon(Icons.lock),
                                       suffixIcon: GestureDetector(
@@ -96,7 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                                             color: Colors.black),
                                       )),
                                 ),
-                                SizedBox(height: 80,),
+                                SizedBox(
+                                  height: 80,
+                                ),
                                 FlatButton(
                                     color: Colors.blue,
                                     onPressed: () {
@@ -118,13 +122,23 @@ class _LoginPageState extends State<LoginPage> {
                                                   builder: (context) =>
                                                       ItemDonated()),
                                               (route) => false);
+
+                                          if (_email.text.trim() ==
+                                              'profesykxng@gmail.com') {
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Admin()));
+                                          }
                                         } else {
                                           setState(() {
                                             isLoading = false;
                                           });
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(value)));
+                                          showAlertDialog(context);
                                         }
                                       });
                                     },
@@ -167,4 +181,33 @@ class _LoginPageState extends State<LoginPage> {
                 )),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+
+  //setting up the AlertDialog in terms of a title, content and actions
+  AlertDialog confDialog = AlertDialog(
+    title: Text("Login Unsuccessful!!"),
+    content: Text(
+        "Your login attemp was unsuccessful. Please enter a valid email and password combination"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  //This method will show the actual dialog
+  showDialog(
+    barrierColor: Colors.blue,
+    context: context,
+    builder: (BuildContext context) {
+      return confDialog;
+    },
+  );
 }

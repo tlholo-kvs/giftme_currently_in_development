@@ -1,3 +1,4 @@
+import 'package:final_application/screens/AuthScreen/create_request.dart';
 import 'package:final_application/screens/AuthScreen/donor.dart';
 import 'package:final_application/styles/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,7 +69,7 @@ class _DonationOptionsState extends State<DonationOptions> {
                     ),
                   ],
                   //importing the white BoxDecoration
-                  color: AppColors.boxDecorationWhite,
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
                   ),
@@ -81,7 +82,7 @@ class _DonationOptionsState extends State<DonationOptions> {
               ),
               onTap: () {
                  Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Donor()));
+                          MaterialPageRoute(builder: (context) => CreateRequest()));
               }),
         )
       ],

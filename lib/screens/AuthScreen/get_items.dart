@@ -1,6 +1,6 @@
 import 'package:final_application/styles/app_colors.dart';
+import 'package:final_application/widgets/build_rating_widget.dart';
 import 'package:flutter/material.dart';
-
 
 class GetItem extends StatefulWidget {
   _GetItemState createState() => _GetItemState();
@@ -169,30 +169,21 @@ class _GetItemState extends State<GetItem> {
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text('Request'),
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(120, 40),
+                //I added this ElevatedButton styling
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  fixedSize: MaterialStateProperty.all(Size(120, 40)),
                 ),
               ),
             )
           ],
         ),
       ),
-    );
-  }
-}
-
-//The buildRating widget used in the _buildRating widget
-class BuildRatingIcon extends StatelessWidget {
-  const BuildRatingIcon({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.star_outline,
-      size: 30,
-      color: AppColors.yellowIconsColor,
     );
   }
 }

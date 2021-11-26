@@ -85,16 +85,24 @@ class _RequestMainState extends State<RequestMain> {
                 Padding(
                   padding: const EdgeInsets.only(top: 50, left: 200),
                   child: ElevatedButton(
+                    //I added a ButtonStyle
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.white),
+                        ),
+                      ),
+                      elevation: MaterialStateProperty.all<double>(5),
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                    ),
                     onPressed: () {
-                       Navigator.push(context,
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) => FoodItems()));
                     },
                     child: Text(
                       'Assist',
                       style: TextStyle(fontSize: 20),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
                     ),
                   ),
                 )
@@ -160,8 +168,8 @@ class _RequestMainState extends State<RequestMain> {
         SizedBox(width: 15),
         TextButton(
             onPressed: () {
-               Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => RequestMain2()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RequestMain2()));
             },
             child: Text(
               'Other Items',
@@ -236,8 +244,10 @@ class _RequestMainState extends State<RequestMain> {
                         ),
                         TextButton(
                             onPressed: () {
-                               Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()));
                             },
                             child: Text(
                               'Donations',
@@ -283,17 +293,23 @@ class _RequestMainState extends State<RequestMain> {
                   onTap: (index) {
                     setState(() {
                       if (index == 0) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
                       } else if (index == 2) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => DonationOptions()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DonationOptions()));
                       } else if (index == 3) {
-                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Profile()));
-                      } else {
                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => RequestMain2()));
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RequestMain2()));
                       }
                       _currentpos = index;
                     });

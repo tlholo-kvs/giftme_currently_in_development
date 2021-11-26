@@ -1,16 +1,21 @@
+
+
 import 'package:firebase_database/firebase_database.dart';
 
-class Item {
+class Item{
+
   String key;
   String description;
-  String title;
+  String title; 
+  
+
 
   Item(this.description, this.title);
 
-  Item.fromSnapshot(DataSnapshot snapshot)
-      : key = snapshot.key,
-        title = snapshot.value["Title"],
-        description = snapshot.value['Description'];
+  Item.fromSnapshot(DataSnapshot snapshot) :
+  key = snapshot.key,
+  title = snapshot.value["Title"],
+  description = snapshot.value['Description'];
 
   toJson() {
     return {
@@ -18,4 +23,7 @@ class Item {
       'description': description,
     };
   }
+
+
+
 }

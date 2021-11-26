@@ -18,7 +18,7 @@ class _ProfileState extends State<Profile> {
             height: 150,
             width: 150,
             decoration: BoxDecoration(
-              boxShadow: [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
                     spreadRadius: 2,
@@ -59,7 +59,7 @@ class _ProfileState extends State<Profile> {
             height: 150,
             width: 150,
             decoration: BoxDecoration(
-              boxShadow: [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
                     spreadRadius: 2,
@@ -79,8 +79,8 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(
                         fontSize: 25,
                       )),
-                      SizedBox(height: 60),
-                      Text("Other Items Shared",
+                  SizedBox(height: 60),
+                  Text("Other Items Shared",
                       style: TextStyle(
                         fontSize: 15,
                       )),
@@ -107,7 +107,7 @@ class _ProfileState extends State<Profile> {
             height: 150,
             width: 150,
             decoration: BoxDecoration(
-              boxShadow: [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
                     spreadRadius: 2,
@@ -127,8 +127,8 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(
                         fontSize: 25,
                       )),
-                      SizedBox(height: 60),
-                      Text("Food Items Shared",
+                  SizedBox(height: 60),
+                  Text("Food Items Shared",
                       style: TextStyle(
                         fontSize: 15,
                       )),
@@ -155,7 +155,7 @@ class _ProfileState extends State<Profile> {
             height: 60,
             width: 380,
             decoration: BoxDecoration(
-              boxShadow: [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.blue.withOpacity(0.5),
                     spreadRadius: 2,
@@ -170,20 +170,24 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 60),
-                 
-                      Icon(Icons.stars_outlined, color: Colors.yellow,),
+                      Icon(
+                        Icons.stars_outlined,
+                        color: Colors.yellow,
+                      ),
                       SizedBox(width: 10),
-                      Text("Pledges/Archievements/Goals",
-                      style: TextStyle(
-                        fontSize: 15,
-                      )),
-                       SizedBox(width: 10),
-                      Icon(Icons.arrow_right_alt, color: Colors.blue,),
+                      Text("Pledges/Achievements/Goals",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
+                      SizedBox(width: 10),
+                      Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.blue,
+                      ),
                     ],
                   ),
                 ],
@@ -194,7 +198,6 @@ class _ProfileState extends State<Profile> {
       ],
     );
   }
-
 
   Widget _buildImage() {
     return Icon(Icons.add_a_photo_rounded, size: 80);
@@ -261,7 +264,6 @@ class _ProfileState extends State<Profile> {
                   _buildContainment2(),
                   SizedBox(width: 70),
                   _buildContainment3(),
-                  
                 ],
               ),
             ),
