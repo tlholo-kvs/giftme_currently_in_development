@@ -13,17 +13,17 @@ void main() {
   FirebaseMessaging.instance.subscribeToTopic('item added');
 }
 
-// FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-// //This method will be used to subscribe a user to the item added topic
-// void fcmSubscribe() {
-//   firebaseMessaging.subscribeToTopic('item added');
-// }
+//This method will be used to subscribe a user to the item added topic
+void fcmSubscribe() {
+  firebaseMessaging.subscribeToTopic('item added');
+}
 
-// //This method will be used to unsubscribe a user to the item added topic
-// void fcmUnSubscribe() {
-//   firebaseMessaging.unsubscribeFromTopic('item added');
-// }
+//This method will be used to unsubscribe a user to the item added topic
+void fcmUnSubscribe() {
+  firebaseMessaging.unsubscribeFromTopic('item added');
+}
 
 class App extends StatelessWidget {
   @override
