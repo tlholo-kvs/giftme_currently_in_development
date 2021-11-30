@@ -1,3 +1,10 @@
+//Name : HomePage
+//Purpose : This is the Home page of the app where a user will be presented with
+//          links to other various pages of the app. The page also contains a
+//          side and bottom navigation bar for navigation between different options,
+//          with the side bar being for settings and personalization pages, and the
+//          bottomnavigation bar being for pages that form part of succefully
+//          using the app for what it's meant to do
 import 'package:final_application/screens/AuthScreen/donation_options.dart';
 import 'package:final_application/screens/AuthScreen/get_items.dart';
 import 'package:final_application/screens/AuthScreen/main_page2.dart';
@@ -25,6 +32,7 @@ class _HomePageState extends State<HomePage> {
             Radius.circular(20),
           ),
           child: Container(
+            //Sizing property of the container
             height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width * 0.9,
             //importing the grey boxDecoration colour
@@ -62,6 +70,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             height: 150,
             width: 350,
+            //importing the Blue container colour of 300
             color: AppColors.containerColourBlue300,
             child: Row(
               children: [
@@ -222,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 730),
+                padding: const EdgeInsets.only(top: 700),
                 child: BottomNavigationBar(
                   currentIndex: _currentpos,
                   items: [

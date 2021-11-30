@@ -37,7 +37,7 @@ dependencies:
   dependencies:
   image_picker:
   firebase_storage:
-  firebase_messaging: ^8.0.0-dev.15
+  firebase_messaging: 
   flutter_local_notifications: 
   
 

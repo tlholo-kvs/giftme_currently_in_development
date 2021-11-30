@@ -1,3 +1,7 @@
+//Name : LoginPage
+//Purpose : This is the login page. It will display textfields that the user
+//          needs to fill in to login. It also has a link to reset password
+//          and a link to create an account if you don't have one
 import 'package:final_application/provider/auth_provider.dart';
 import 'package:final_application/screens/AuthScreen/admin_home.dart';
 import 'package:final_application/screens/AuthScreen/create_request.dart';
@@ -16,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
 
+  //This widget contains the implementation of the Sign In portion of the UI,
+  //which is shown by use of a Row
   Widget _buildLogo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -43,6 +49,8 @@ class _LoginPageState extends State<LoginPage> {
               ? Stack(
                   children: [
                     Container(
+                      //This is how the Container will adjust itself to fit on
+                      //the screen
                       height: MediaQuery.of(context).size.height * 0.5,
                       width: MediaQuery.of(context).size.width,
                       child: Container(
@@ -75,6 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(
                                   height: 40,
                                 ),
+                                //This part of code holds the implementation of
+                                //TextFormFields that will be used to collect
+                                //log in information from the user
                                 TextFormField(
                                   controller: _email,
                                   decoration: InputDecoration(
@@ -101,6 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(
                                   height: 80,
                                 ),
+                                //This FlatButton will be the trigger for either
+                                //loggin in if you successfully completed the
+                                //textformfields, or provide you with error
+                                //feedback
                                 FlatButton(
                                     color: Colors.blue,
                                     onPressed: () {
@@ -122,7 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                                                   builder: (context) =>
                                                       ItemDonated()),
                                               (route) => false);
-
+                                          //The administartor information
+                                          //is hard-coded since they will
+                                          //not need to create an account
+                                          //themselves
                                           if (_email.text.trim() ==
                                               'profesykxng@gmail.com') {
                                             setState(() {

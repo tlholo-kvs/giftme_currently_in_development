@@ -256,7 +256,6 @@ class _RequestedItemsState extends State<RequestedItems> {
                           );
                         }
                       }),
-                  
                 ],
               ),
             ),
@@ -267,20 +266,16 @@ class _RequestedItemsState extends State<RequestedItems> {
                   Icon(Icons.arrow_left),
                   FlatButton(
                       onPressed: () {
-
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ItemDonated()),
-                              );
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ItemDonated()),
+                        );
                       },
                       child: Text(
                         "Donations",
                         style: TextStyle(color: Colors.blue),
                       )),
-
-                      
                 ],
               ),
             ),

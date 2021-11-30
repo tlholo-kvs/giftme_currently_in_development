@@ -7,10 +7,23 @@ import 'package:flutter/material.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
+  runApp(App());
   LocalNotificationServices.initialize();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  runApp(App());
+  FirebaseMessaging.instance.subscribeToTopic('item added');
 }
+
+// FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+
+// //This method will be used to subscribe a user to the item added topic
+// void fcmSubscribe() {
+//   firebaseMessaging.subscribeToTopic('item added');
+// }
+
+// //This method will be used to unsubscribe a user to the item added topic
+// void fcmUnSubscribe() {
+//   firebaseMessaging.unsubscribeFromTopic('item added');
+// }
 
 class App extends StatelessWidget {
   @override

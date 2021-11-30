@@ -264,6 +264,7 @@ class _ItemDonatedState extends State<ItemDonated> {
               child: Row(
                 children: [
                   ElevatedButton(
+
                       //I added this ElevatedButton styling
                       style: ButtonStyle(
                         shape:
@@ -273,7 +274,7 @@ class _ItemDonatedState extends State<ItemDonated> {
                             side: BorderSide(color: Colors.white),
                           ),
                         ),
-                        fixedSize: MaterialStateProperty.all(Size(120, 40)),
+                        fixedSize: MaterialStateProperty.all(Size(100, 40)),
                       ),
                       onPressed: () {
                         Navigator.push(
